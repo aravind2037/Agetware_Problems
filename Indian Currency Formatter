@@ -1,0 +1,17 @@
+def format_indian_currency(num):
+    num_str = str(num)
+    if '.' in num_str:
+        int_part, dec_part = num_str.split('.')
+        dec_part = '.' + dec_part
+    else:
+        int_part, dec_part = num_str, ''
+    if len(int_part) <= 3:
+        return int_part + dec_part
+    else:
+        prefix = int_part[:-3]
+        suffix = int_part[-3:]
+        res = ''
+        while len(prefix) > 2:
+            res = ',' + prefix[-2:] + res
+            prefix = prefix[:-2]
+        return prefix + res + ',' + suffix + dec_part if prefix else res[1:] + ',' + suffix + dec_part
