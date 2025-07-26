@@ -1,0 +1,17 @@
+def combine_elements(list1, list2):
+    combined = sorted(list1 + list2, key=lambda x: x['positions'][0])
+    result = []
+    for item in combined:
+        if not result:
+            result.append(item)
+        else:
+            last = result[-1]
+            l1, r1 = last['positions']
+            l2, r2 = item['positions']
+            overlap = max(0, min(r1, r2) - max(l1, l2))
+            length = r2 - l2
+            if overlap >= length / 2:
+                last['values'] += item['values']
+            else:
+                result.append(item)
+    return result
