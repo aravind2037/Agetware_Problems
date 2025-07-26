@@ -1,0 +1,27 @@
+def caesar_cipher_encode(msg, shift):
+    result = ''
+    for char in msg:
+        if char.isalpha():
+            offset = 65 if char.isupper() else 97
+            result += chr((ord(char) - offset + shift) % 26 + offset)
+        else:
+            result += char
+    return result
+
+def caesar_cipher_decode(msg, shift):
+    return caesar_cipher_encode(msg, -shift)
+
+
+operation = input("Do you want to encode or decode? (type 'encode' or 'decode'): ").strip().lower()
+message = input("Enter your message: ")
+shift = int(input("Enter shift value (number): "))
+
+
+if operation == 'encode':
+    output = caesar_cipher_encode(message, shift)
+    print("Encoded message:", output)
+elif operation == 'decode':
+    output = caesar_cipher_decode(message, shift)
+    print("Decoded message:", output)
+else:
+    print("Invalid operation. Please type 'encode' or 'decode'.")
